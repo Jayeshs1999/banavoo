@@ -6,7 +6,6 @@ import Loader from "../components/Loader";
 import { toast } from "react-toastify";
 import { setCredentials } from "../slices/authSlice";
 import { useGetMyOrdersQuery } from "../slices/orderApiSlice";
-import Message from "../components/Message";
 import { FaTimes } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
@@ -104,58 +103,6 @@ const ProfileScreen = () => {
             </Button>
             {loadingUpdateProfile && <Loader />}
           </Form>
-        </Col>
-        <Col md={9}>
-          <h2>My Orders</h2>
-          {isLoading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant="danger">Error in profileScreeen</Message>
-          ) : (
-            <Table striped hover responsive className="table-sm">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Date</th>
-                  <th>Total</th>
-                  <th>Paid</th>
-                  <th>Delivered</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders &&
-                  orders?.orders.map((order: any) => (
-                    <tr key={order._id}>
-                      <td>{order._id}</td>
-                      <td>{order.createdAt.substring(0, 10)}</td>
-                      <td>{order.totalPrice}</td>
-                      <td>
-                        {order.isPaid ? (
-                          order.paidAt.substring(0, 10)
-                        ) : (
-                          <FaTimes style={{ color: "red" }} />
-                        )}
-                      </td>
-
-                      <td>
-                        {order.isDelivered ? (
-                          order.deliveredAt.substring(0, 10)
-                        ) : (
-                          <FaTimes style={{ color: "red" }} />
-                        )}
-                      </td>
-
-                      <LinkContainer to={`/order/${order._id}`}>
-                        <Button className="btn-sm" variant="light">
-                          Details
-                        </Button>
-                      </LinkContainer>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
-          )}
         </Col>
       </Row>
     </>

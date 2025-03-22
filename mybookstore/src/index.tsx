@@ -11,23 +11,14 @@ import "./assets/styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
 import { Provider } from "react-redux";
 import store from "./store";
-import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import ShippingScreen from "./screens/ShippingScreen";
 import PrivateRoute from "./components/PrivateRoute";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrdersScreen from "./screens/PlaceOrdersScreen";
-import OrderScreen from "./screens/OrderScreen";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import ProfileScreen from "./screens/ProfileScreen";
 import AdminRoute from "./components/AdminRoute";
 import OrderListScreen from "./screens/admin/OrderListScreen";
-import ProductListScreen from "./screens/admin/ProductListScreen";
-import ProductEditScreen from "./screens/admin/ProductEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import UserEditScreen from "./screens/admin/UserEditScreen";
 import { HelmetProvider } from "react-helmet-async";
@@ -35,7 +26,7 @@ import ForgetPasswordScreen from "./screens/ForgetPasswordScreen";
 import AboutUs from "./screens/AboutUs";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
-
+import CustomizationForm from "./components/CustomizationForm";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -43,32 +34,31 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/search/:keyword" element={<HomeScreen />} />
       <Route path="/category/:categoryName" element={<HomeScreen />} />
-      <Route path="/category/:categoryName/page/:pageNumber" element={<HomeScreen />} />
+      <Route
+        path="/category/:categoryName/page/:pageNumber"
+        element={<HomeScreen />}
+      />
       <Route path="/page/:pageNumber" element={<HomeScreen />} />
-      <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
-      <Route path="/product/:id" element={<ProductScreen />} />
-      <Route path="/cart" element={<CartScreen />} />
+      <Route
+        path="/search/:keyword/page/:pageNumber"
+        element={<HomeScreen />}
+      />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/forgetpassword" element={<ForgetPasswordScreen />} />
       <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/customization" element={<CustomizationForm />} />
 
       {/*is any route make Private take it  here  */}
-      <Route path="" element={<PrivateRoute />}>
-        <Route path="/shipping" element={<ShippingScreen />} />
-        <Route path="/payment" element={<PaymentScreen />} />
-        <Route path="/placeorder" element={<PlaceOrdersScreen />} />
-        <Route path="/order/:id" element={<OrderScreen />} />
-        <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="/productlist" element={<ProductListScreen />} />
-        <Route path="/productlist/:pageNumber" element={<ProductListScreen />} />
-        <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
-      </Route>
+      <Route path="" element={<PrivateRoute />}></Route>
 
-       {/*is any route make Admin take it  here  */}
-       <Route path="" element={<AdminRoute />}>
+      {/*is any route make Admin take it  here  */}
+      <Route path="" element={<AdminRoute />}>
         <Route path="/admin/orderlist" element={<OrderListScreen />} />
-        <Route path="/admin/orderlist/:pageNumber" element={<OrderListScreen />} />
+        <Route
+          path="/admin/orderlist/:pageNumber"
+          element={<OrderListScreen />}
+        />
         <Route path="/admin/userlist" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Route>
@@ -82,17 +72,20 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <I18nextProvider i18n={i18n}>
-  <React.StrictMode>
-    <HelmetProvider>
-    <I18nextProvider i18n={i18n}>
-    <Provider store={store}>
-      <PayPalScriptProvider  deferLoading={true} options={{clientId:''}}>
-        <RouterProvider router={router} />
-      </PayPalScriptProvider>
-    </Provider>
-    </I18nextProvider>
-    </HelmetProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+      <HelmetProvider>
+        <I18nextProvider i18n={i18n}>
+          <Provider store={store}>
+            <PayPalScriptProvider
+              deferLoading={true}
+              options={{ clientId: "" }}
+            >
+              <RouterProvider router={router} />
+            </PayPalScriptProvider>
+          </Provider>
+        </I18nextProvider>
+      </HelmetProvider>
+    </React.StrictMode>
   </I18nextProvider>
 );
 

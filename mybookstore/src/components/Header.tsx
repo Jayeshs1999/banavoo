@@ -1,168 +1,58 @@
-import React, { useState } from "react";
-import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
-import logo from "../assets/logo.png";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
-import SearchBox from "./SearchBox";
-import { resetCart } from "../slices/cartSlice";
-import scrollToTop from "../utils/moveToTop";
-import categories, { userProfileVisibleLogic } from "../utils/objects";
-import { useTranslation } from "react-i18next";
-const Header = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("language") ? localStorage.getItem("language") : "en"
-  );
-  const { cartItems } = useSelector((state: any) => state.cart);
-  const { userInfo } = useSelector((state: any) => state.auth);
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import logo from "../assets/logo.jpeg";
+import { useNavigate } from "react-router-dom";
 
-  const dispatch = useDispatch();
+function Header() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-
-  const [logoutApiCall] = useLogoutMutation();
-
-  const logoutHandler = async () => {
-    try {
-      await logoutApiCall("").unwrap();
-      dispatch(logout(""));
-      dispatch(resetCart());
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (lng: string) => {
-    localStorage.setItem("language", lng);
-    setSelectedLanguage(lng);
-    i18n.changeLanguage(lng);
-  };
-
   return (
-    <header className="sticky-header">
-      <Navbar
-        bg="primary"
-        className="navbar-bg-color"
-        variant="dark"
-        expand="xl"
-        collapseOnSelect
-      >
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand className="domain-font">
-              <img width={"50px"} src={logo} alt="abs" />
-              &nbsp; <strong>BookBucket.In</strong>
-            </Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle area-aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <SearchBox />
-              <LinkContainer to="/">
-                <Nav.Link>{t("home")}</Nav.Link>
-              </LinkContainer>
-              <NavDropdown
-                title={t("categories")}
-                id="adminmenu"
-                style={{ zIndex: "999" }}
-              >
-                <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-                  {categories &&
-                    categories.map((category: any, index) => (
-                      <LinkContainer
-                        key={index}
-                        to={`category/${category.name}`}
-                      >
-                        <NavDropdown.Item>{category.name}</NavDropdown.Item>
-                      </LinkContainer>
-                    ))}
-                </div>
-              </NavDropdown>
-              <LinkContainer to="/aboutus" onClick={scrollToTop}>
-                <Nav.Link>{t("aboutUs")}</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <FaShoppingCart />
-                    <div style={{ marginLeft: "5px" }}>{t("cart")}</div>
-                  </div>
-
-                  {cartItems.length > 0 && (
-                    <Badge pill bg="success" style={{ marginLeft: "5px" }}>
-                      {cartItems.reduce((a: any, c: any) => a + c.qty, 0)}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </LinkContainer>
-              <NavDropdown
-                title={
-                  userInfo?.isAdmin
-                    ? `${t("admin")}`
-                    : `${t("userProductAdmin")}`
-                }
-                id="adminmenu"
-              >
-                <LinkContainer to="/productlist">
-                  <NavDropdown.Item>{t("products")}</NavDropdown.Item>
-                </LinkContainer>
-                {userInfo && userInfo.isAdmin && (
-                  <>
-                    <LinkContainer to="/admin/userlist">
-                      <NavDropdown.Item>{t("users")}</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/orderlist">
-                      <NavDropdown.Item>{t("orders")}</NavDropdown.Item>
-                    </LinkContainer>
-                  </>
-                )}
-              </NavDropdown>
-
-              <NavDropdown title={t("language")} id="language">
-                <div onClick={() => changeLanguage("en")}>
-                  <NavDropdown.Item active={selectedLanguage === "en"}>
-                    English
-                  </NavDropdown.Item>
-                </div>
-                <div onClick={() => changeLanguage("es")}>
-                  <NavDropdown.Item active={selectedLanguage === "es"}>
-                    मराठी
-                  </NavDropdown.Item>
-                </div>
-              </NavDropdown>
-
-              {userInfo ? (
-                <NavDropdown
-                  title={<span>{userProfileVisibleLogic(userInfo.name)}</span>}
-                  id="username"
-                >
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>{t("profileAndOrders")}</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    {t("logout")}
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>
-                    <FaUser />
-                    {t("signIn")}
-                  </Nav.Link>
-                </LinkContainer>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-tertiary"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))",
+      }}
+    >
+      <Container>
+        <Navbar.Brand href="#home">
+          <img
+            width={150}
+            src={logo}
+            alt="logo"
+            onClick={() => navigate("/")}
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#features">Services</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              Dank memes
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-};
+}
 
 export default Header;

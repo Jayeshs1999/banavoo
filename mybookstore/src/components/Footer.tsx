@@ -6,12 +6,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="pt-3">
       <footer>
         <Container>
           <Row>
             <Col className="text-center pyt-3">
-              <p>BookBucket.in &copy; {currentYear}</p>
+              <p>Banavoo.in &copy; {currentYear}</p>
             </Col>
           </Row>
         </Container>
