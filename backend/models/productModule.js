@@ -26,64 +26,65 @@ const reviewSchema = mongoose.Schema({
 const productSchema =new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'User'
     },
     name: {
         type: String,
-        required: true
+        required: false
     },
-
-    image: {
+     email: {
         type:String,
-        required: true
+        required: false,
     },
-    brand: {
+      phoneNumber: {
         type:String,
-        required: true
+        required: false,
     },
-    category: {
+     projectTitle: {
         type:String,
-        required: true
+        required: false,
     },
     description: {
         type:String,
-        required: true
+        required: false,
     },
-    reviews: [reviewSchema],
+    quantity: {
+        type:Number,
+        required: false,
+    },  
+    budget: {
+        type:Number,
+        required: false,
+    },
+    deliveryDeadline: {
+        type:Date,
+        required: false,
+    },
+    specialInstructions: {
+        type:String,
+        required: false,
+    },
+    image: {
+        type:String,
+        required: false
+    },
 
-    rating: {
-        type:Number,
-        required: true,
-        default: 0
+    description: {
+        type:String,
+        required: false
     },
-    numReviews: {
-        type:Number,
-        required: true,
-        default: 0
-    },
-    price: {
-        type:Number,
-        required: true,
-        default: 0
-    },
-    countInStock: {
-        type:Number,
-        required: true,
-        default: 0
-    },
+
     address: {
         type: String,
-        required: true,
+        required: false,
     },
-    phoneNumber: {
-        type:String,
-        required: true,
+
+    status : {
+        type: String,
+        required: false,
     },
-    bookType: {
-        type:String,
-        required: true,
-    }
+  
 
 }, {
     timestamps:true

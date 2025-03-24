@@ -27,30 +27,25 @@ import AboutUs from "./screens/AboutUs";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import CustomizationForm from "./components/CustomizationForm";
+import OurServices from "./components/OurServices";
+import HelpSection from "./components/HelpSection";
+import PlacedOrder from "./components/placedOrder";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       {/* Public route */}
       <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/search/:keyword" element={<HomeScreen />} />
-      <Route path="/category/:categoryName" element={<HomeScreen />} />
-      <Route
-        path="/category/:categoryName/page/:pageNumber"
-        element={<HomeScreen />}
-      />
-      <Route path="/page/:pageNumber" element={<HomeScreen />} />
-      <Route
-        path="/search/:keyword/page/:pageNumber"
-        element={<HomeScreen />}
-      />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/forgetpassword" element={<ForgetPasswordScreen />} />
-      <Route path="/aboutus" element={<AboutUs />} />
-      <Route path="/customization" element={<CustomizationForm />} />
-
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/our-services" element={<OurServices />} />
+      <Route path="/help" element={<HelpSection />} />
       {/*is any route make Private take it  here  */}
-      <Route path="" element={<PrivateRoute />}></Route>
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/customization" element={<CustomizationForm />} />
+        <Route path="/placed-order" element={<PlacedOrder />} />
+      </Route>
 
       {/*is any route make Admin take it  here  */}
       <Route path="" element={<AdminRoute />}>

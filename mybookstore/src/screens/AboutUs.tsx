@@ -1,125 +1,105 @@
-import React from "react";
-import { Container, Row, Col, Carousel, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const AboutUs = () => {
-  const developers = [
-    {
-      _id: 1,
-      name: "Jayesh Sevatkar",
-      position: "Founder, MERN Stack developer",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2Fimage.jpeg?alt=media&token=68e004c3-4070-449c-b4a6-1ed50a707f5c&_gl=1*279wwo*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzE5MDE5NC4xOC4xLjE2OTcxOTA0MTYuMjAuMC4w",
-    },
-    {
-      _id: 2,
-      name: "Sanket Ainchwar",
-      position: "Backend Engineer",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2Fsa.jpeg?alt=media&token=9c96fbec-4e4c-4600-a3ed-cfac3c15a39b&_gl=1*9x0z7k*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzczODM5Mi4yNy4xLjE2OTc3Mzg3NzkuNDguMC4w",
-    },
-    {
-      _id: 3,
-      name: "Dikshant Tirpude",
-      position: "Product Manager",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2FWhatsApp%20Image%202023-10-18%20at%2012.08.29%20AM.jpeg?alt=media&token=a1d11060-2611-42a0-a30b-1f37f010ae6a&_gl=1*21t2mg*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzU2Nzk1Ni4yMy4xLjE2OTc1Njc5ODkuMjcuMC4w",
-    },
-    {
-      _id: 4,
-      name: "Shivam Kinkar",
-      position: "Account Manager",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2Fsk.jpeg?alt=media&token=fa812607-2e82-475c-a11a-a98224419a2e&_gl=1*et15m0*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzczODM5Mi4yNy4xLjE2OTc3Mzg1MzIuMzkuMC4w",
-    },
-  ];
+export default function AboutUs() {
   return (
-    <section id="about-us">
-      <Container>
-        <h2>About Us</h2>
-        <Link to={"/"} className="btn btn-light mb-3">
-        Go Back
-      </Link>
-        <Row>
-          <Col md={6}>
-            <div
+    <section
+      style={{
+        background: "linear-gradient(135deg, #ff9a9e, #fad0c4)",
+        padding: "50px 20px",
+        borderRadius: "10px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+        textAlign: "center",
+        maxWidth: "900px",
+        margin: "auto",
+      }}
+    >
+      {/* Heading */}
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        style={{
+          fontSize: "36px",
+          fontWeight: "bold",
+          color: "#333",
+          marginBottom: "15px",
+        }}
+      >
+        About <span style={{ color: "#ff7f50" }}>Banavoo</span>
+      </motion.h2>
+
+      {/* Description */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        style={{
+          fontSize: "18px",
+          color: "#222",
+          marginBottom: "30px",
+          lineHeight: "1.6",
+        }}
+      >
+        At <strong>Banavoo</strong>, we believe in turning imagination into
+        reality! Whether it's a <strong>custom product</strong>,{" "}
+        <strong>a unique design</strong>, or
+        <strong>bulk orders</strong>, we craft every detail to perfection. Your{" "}
+        <strong>ideas, our innovation!</strong>
+      </motion.p>
+
+      {/* Three Core Sections */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gap: "20px",
+        }}
+      >
+        {[
+          {
+            title: "🎯 Our Mission",
+            description:
+              "To provide a seamless experience in bringing unique and customized products to life.",
+          },
+          {
+            title: "🌟 Our Vision",
+            description:
+              "To become the go-to platform for personal and business customization needs globally.",
+          },
+          {
+            title: "💡 Why Choose Us?",
+            description:
+              "We offer fast, high-quality, and personalized solutions with doorstep delivery!",
+          },
+        ].map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            style={{
+              backgroundColor: "white",
+              padding: "20px",
+              borderRadius: "10px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <h3
               style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                // alignItems: "center",
+                fontSize: "22px",
+                fontWeight: "bold",
+                color: "#ff7f50",
+                marginBottom: "10px",
               }}
             >
-              {/* <img
-                src="https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2Fimage.jpeg?alt=media&token=68e004c3-4070-449c-b4a6-1ed50a707f5c&_gl=1*279wwo*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzE5MDE5NC4xOC4xLjE2OTcxOTA0MTYuMjAuMC4w" // Replace with your image URL
-                alt="About Us"
-                className="img-fluid rounded-circle"
-                style={{
-                  boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.5)",
-                }}
-              /> */}
-
-              <Carousel
-              interval={1500}
-                pause="hover"
-              
-                className="bg-error mb-4 user-carousel-background"
-                style={{
-                  boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                {developers.map((developer: any) => (
-                  <Carousel.Item
-                    key={developer._id}
-                    className="custom-carousel-item"
-                  >
-                    <Image
-                      src={developer.image}
-                      alt={developer.name}
-                      className="custom-image"
-                    />
-                    <Carousel.Caption className="carousel-caption">
-                      <h2>{developer.name} <br/><span style={{color: '#baf2ba', fontSize:'22px'}}>{developer.position}</span></h2>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            </div>
-          </Col>
-          <Col md={6}>
-            <h3>Welcome to our BookBucket.IN</h3>
-            <h4>Contact us</h4>
-            <p>+91 8888585093</p>
-            <p>jayeshsevatkar55@gmail.com</p>
-            <h4>Why we are here</h4>
-
-            <p>
-              We're passionate about bringing the joy of reading to book
-              enthusiasts everywhere. Our bookshop offers a wide selection of
-              both new and gently used books at affordable prices. Whether
-              you're an avid reader or just looking for your next great read, we
-              have something for everyone.
+              {item.title}
+            </h3>
+            <p style={{ fontSize: "16px", color: "#333" }}>
+              {item.description}
             </p>
-            <p>
-              We take pride in our work and always strive for excellence.
-              Whether it's developing innovative solutions, providing top-notch
-              customer support, or contributing to our community, we are
-              committed to making a positive impact.
-            </p>
-
-            <h3>No Delivery Charges or Tax/GST</h3>
-            <p>
-              At our bookshop, we believe in making reading accessible to all.
-              That's why we offer free delivery on all orders, and there are no
-              hidden charges or taxes. Your total cost is what you see at
-              checkout. Enjoy your book shopping experience without any
-              surprises.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
-};
-
-export default AboutUs;
+}

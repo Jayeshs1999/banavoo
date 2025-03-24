@@ -8,16 +8,13 @@ import fisherYatesShuffle from "../routes/suffleBooks.js";
 const getProducts =asyncHandler( async (req,res)=>{
     const pageSize = process.env.PAGINATION_LIMIT;
     const page = Number(req.query.pageNumber) || 1;
-
-    const category = req.query.category;
     const user = req.query.userId;
     const  keyword = req.query.keyword ? {name: {$regex: req.query.keyword, $options: 'i'}} : {}
-    const categoryFilter = category ? { category } : {};
 
     // Add userId filter if it is available in the request
     const userIdFilter = user ? { user } : {};
       // Combine all filters
-    const filters = { ...keyword, ...categoryFilter, ...userIdFilter };
+    const filters = { ...keyword, ...userIdFilter };
 
     const count = await Product.countDocuments(filters);
     if(user) {
@@ -31,12 +28,10 @@ const getProducts =asyncHandler( async (req,res)=>{
         const products = await Product.find(filters)
         .limit(pageSize)
         .skip(pageSize * (page - 1))
+        .sort({ updatedAt: -1 })
         .lean() // Convert documents to plain JavaScript objects
 
-    // Randomize the order of products using Fisher-Yates shuffle
-    const randomizedProducts = fisherYatesShuffle(products);
-
-    res.json({products:randomizedProducts, page, pages: Math.ceil(count/pageSize)  });
+    res.json({products:products, page, pages: Math.ceil(count/pageSize)  });
     }
 });
 
@@ -61,30 +56,34 @@ const getProductsById =asyncHandler( async (req,res)=>{
 const createProduct =asyncHandler( async (req,res)=>{
     const  {
         name, 
-        price, 
-        description, 
-        image, 
-        brand,
-        category,
-        countInStock,
-        address,
+        email, 
         phoneNumber,
-        bookType
+        projectTitle,
+        description, 
+        quantity,
+        budget,
+        deliveryDeadline,
+        specialInstructions,
+        image, 
+        address,
+        status="Pending",
+        
     } = req.body;
     
     const product = new Product({
         name: name,
-        price: price,
-        user: req.user._id,
-        image: image? image : 'https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2F26690.jpg?alt=media&token=91f701e4-4f9f-4552-9c40-fdc86f9e3f66&_gl=1*5qo2th*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzYyOTIzMy4yNC4xLjE2OTc2MjkyNjguMjUuMC4w',
-        brand: brand,
-        category: category,
-        countInStock: countInStock,
-        numReviews: 0,
+        email: email,
+        projectTitle: projectTitle,
         description: description,
+        quantity: quantity,
+        budget: budget,
+        deliveryDeadline: deliveryDeadline,
+        specialInstructions: specialInstructions,
+        user: req.user._id,
+        image: image? image : 'https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2F26690.jpg?alt=media&token=91f701e4-4f9f-4552-9c40-fdc86f9e3f66&_gl=1*5qo2th*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzYyOTIzMy4yNC4xLjE2OTc2MjkyNjguMjUuMC4w',        
         address: address,
         phoneNumber: phoneNumber,
-        bookType: bookType
+        status: status,
     })
 
     const createProduct = await product.save();
@@ -97,29 +96,13 @@ const createProduct =asyncHandler( async (req,res)=>{
 //@access Private/admin
 const updateProduct =asyncHandler( async (req,res)=>{
     const  {
-        name, 
-        price, 
-        description, 
-        image, brand,
-        category,
-        countInStock,
-        address,
-        phoneNumber,
-        bookType
+        
+        status="Pending",
     } = req.body;
 
     const product = await Product.findById(req.params.id);
     if(product) {
-        product.name = name;
-        product.price = price;
-        product.description = description;
-        product.image = image;
-        product.brand = brand;
-        product.category = category;
-        product.countInStock = countInStock;
-        product.address = address,
-        product.phoneNumber = phoneNumber
-        product.bookType = bookType
+        product.status = status
 
         const updateProduct =await product.save();
         res.json(updateProduct);

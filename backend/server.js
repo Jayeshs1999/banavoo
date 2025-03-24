@@ -23,10 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 // cookie parser middleware
 app.use(cookieParser());
 
-
-app.use("/api/products", productRoutes);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/products", productRoutes);
 app.use('/api/upload', uploadRoutes)
 app.get("/api/config/paypal", (req, res) =>
   res.send({

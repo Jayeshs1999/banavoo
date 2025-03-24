@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import FormContainer from "../components/FormContainer";
-import { Button, Card, Col, Form, FormGroup, Modal, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  FormGroup,
+  Modal,
+  Row,
+} from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slices/usersApiSlice";
@@ -33,7 +41,12 @@ const RegisterScreen = () => {
   const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
 
   useEffect(() => {
-    if (email !== "" && name !== "" && password !== "" && confirmPassword !== "") {
+    if (
+      email !== "" &&
+      name !== "" &&
+      password !== "" &&
+      confirmPassword !== ""
+    ) {
       setIsFormDateDisabled(false);
     } else {
       setIsFormDateDisabled(true);
@@ -52,33 +65,41 @@ const RegisterScreen = () => {
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else if (password.match(passwordPattern)) {
-      try {
-        setShowVerificationPopup(true);
+      // try {
+      //   setShowVerificationPopup(true);
 
-        //encrypt id using private key
-        const otp = generateOTP();
-        const ciphertext = CryptoJS.AES.encrypt(
-          String(otp),
-          `${process.env.ENCRYPTION_KEY}`
-        ).toString();
-        localStorage.setItem("bookBucketId", ciphertext);
-        const otpSendSuccessfully = sendEmail({
-          name: name,
-          email: email,
-          senderName: "BookBucket",
-          titleMessage: "BookBucket Verify OTP",
-          message: "Please Verify OTP",
-          subMessage: "",
-          otp: otp,
-          currentDate: "",
-          paymentMethod: "",
-          shippingAddress: "",
-        });
-        if ((await otpSendSuccessfully).status) {
-          toast.success("OTP Sent Successfully");
-        }
-      } catch (error) {
-        console.log("error", error);
+      //   //encrypt id using private key
+      //   const otp = generateOTP();
+      //   const ciphertext = CryptoJS.AES.encrypt(
+      //     String(otp),
+      //     `${process.env.ENCRYPTION_KEY}`
+      //   ).toString();
+      //   localStorage.setItem("bookBucketId", ciphertext);
+      //   const otpSendSuccessfully = sendEmail({
+      //     name: name,
+      //     email: email,
+      //     senderName: "BookBucket",
+      //     titleMessage: "BookBucket Verify OTP",
+      //     message: "Please Verify OTP",
+      //     subMessage: "",
+      //     otp: otp,
+      //     currentDate: "",
+      //     paymentMethod: "",
+      //     shippingAddress: "",
+      //   });
+      //   if ((await otpSendSuccessfully).status) {
+      //     toast.success("OTP Sent Successfully");
+      //   }
+      // } catch (error) {
+      //   console.log("error", error);
+      // }
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        toast.success("Register Successfully");
+        navigate(redirect);
+      } catch (error: any) {
+        toast.error(error?.data?.message || error.error);
       }
     } else {
       toast.error("Password must contain number,char, sybmol Ex. book&100");
@@ -122,71 +143,74 @@ const RegisterScreen = () => {
 
   return (
     <>
-      <FormContainer comesfrom='true'>
-      <Card className="mt-5" style={{display:'flex', borderRadius:'10px'}}>
-      <Card.Body>
-        <h1 className="text-center">Sign Up</h1>
-        <Form onSubmit={submitHandler}>
-          <FormGroup controlId="name" className="my-3">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
-          </FormGroup>
+      <FormContainer comesfrom="true">
+        <Card
+          className="mt-5"
+          style={{ display: "flex", borderRadius: "10px" }}
+        >
+          <Card.Body>
+            <h1 className="text-center">Sign Up</h1>
+            <Form onSubmit={submitHandler}>
+              <FormGroup controlId="name" className="my-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></Form.Control>
+              </FormGroup>
 
-          <FormGroup controlId="email" className="my-3">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </FormGroup>
+              <FormGroup controlId="email" className="my-3">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Form.Control>
+              </FormGroup>
 
-          <FormGroup controlId="password" className="my-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </FormGroup>
+              <FormGroup controlId="password" className="my-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </FormGroup>
 
-          <FormGroup controlId="confirmPassword" className="my-3">
-            <Form.Label>Confirm password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </FormGroup>
+              <FormGroup controlId="confirmPassword" className="my-3">
+                <Form.Label>Confirm password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></Form.Control>
+              </FormGroup>
 
-          <Button
-            type="submit"
-            variant="primary"
-            disabled={isLoading || isFormDateDisabled}
-            className="mt-2 w-100"
-          >
-            Register
-          </Button>
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={isLoading || isFormDateDisabled}
+                className="mt-2 w-100"
+              >
+                Register
+              </Button>
 
-          {isLoading && <Loader />}
-        </Form>
-        </Card.Body>
-        <Row className="py-3 text-center">
-          <Col>
-            Already have an account?{" "}
-            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-              Login
-            </Link>
-          </Col>
-        </Row>
+              {isLoading && <Loader />}
+            </Form>
+          </Card.Body>
+          <Row className="py-3 text-center">
+            <Col>
+              Already have an account?{" "}
+              <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+                Login
+              </Link>
+            </Col>
+          </Row>
         </Card>
       </FormContainer>
       <Modal

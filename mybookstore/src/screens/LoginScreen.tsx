@@ -31,6 +31,7 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
+      toast.success("Login Successfully");
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
     } catch (error: any) {
@@ -39,7 +40,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <FormContainer comesfrom='true'>
+    <FormContainer comesfrom="true">
       <Card className="mt-5" style={{ display: "flex", borderRadius: "10px" }}>
         <Card.Body>
           <h1 className="text-center">Sign In</h1>
@@ -72,7 +73,13 @@ const LoginScreen = () => {
               >
                 Sign In
               </Button>
-              <div style={{ display: "flex", justifyContent: "end", marginTop:'5px' }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  marginTop: "5px",
+                }}
+              >
                 <Link to={"/forgetpassword"} className="text-end">
                   Forget Password
                 </Link>
