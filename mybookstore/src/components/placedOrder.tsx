@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   useDeleteProductMutation,
@@ -74,7 +74,17 @@ export default function PlacedOrders() {
     "Rejected",
   ];
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   const handleStatusChange = async (orderId: any, newStatus: any) => {
+    /**
+   * Handle updating the status of an order
+   * @param {string} orderId The id of the order
+   * @param {string} newStatus The new status of the order
+/*************  ✨ Windsurf Command ⭐  *************/
+    /*******  7e67a70f-db91-46f1-a918-719a14d74beb  *******/
     try {
       const payload = {
         _id: orderId,

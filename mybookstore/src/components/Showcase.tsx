@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const showcaseItems = [
@@ -89,6 +89,15 @@ export default function Showcase() {
       prev === showcaseItems.length - 1 ? 0 : prev + 1
     );
   };
+
+  // Automatically move the carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   return (
     <div className="relative py-20 bg-gray-100 text-gray-900 text-center pb-3">
