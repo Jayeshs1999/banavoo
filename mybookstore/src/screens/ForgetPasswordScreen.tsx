@@ -61,31 +61,31 @@ const ForgetPasswordScreen = () => {
     }
   };
 
-  const handleUpdatePassword = async (e: any) => {
-    e.preventDefault();
-    //deycrypt id using private key
-    // const bytes = CryptoJS.AES.decrypt(
-      String(localStorage.getItem("forgetPasswordOtp")),
-      `${process.env.ENCRYPTION_KEY}`
-    );
-    // const originalKey = bytes.toString(CryptoJS.enc.Utf8);
-    if (password.match(passwordPattern)) {
-      // if (verificationCode === originalKey) {
-      try {
-        await forgetPassword({ email, password });
-        toast.success("Password change successfully");
-        localStorage.removeItem("forgetPasswordOtp");
-        navigate("/login");
-      } catch (error) {
-        toast.error("Something went wrong");
-      }
-      // } else {
-      //   toast.error("Please Enter valid OTP");
-      // }
-    } else {
-      toast.error("Password should contain 0-9,a-z,!,@,# ");
-    }
-  };
+  // const handleUpdatePassword = async (e: any) => {
+  //   e.preventDefault();
+  //   //deycrypt id using private key
+  //   // const bytes = CryptoJS.AES.decrypt(
+  //     String(localStorage.getItem("forgetPasswordOtp")),
+  //     `${process.env.ENCRYPTION_KEY}`
+  //   );
+  //   // const originalKey = bytes.toString(CryptoJS.enc.Utf8);
+  //   if (password.match(passwordPattern)) {
+  //     // if (verificationCode === originalKey) {
+  //     try {
+  //       await forgetPassword({ email, password });
+  //       toast.success("Password change successfully");
+  //       localStorage.removeItem("forgetPasswordOtp");
+  //       navigate("/login");
+  //     } catch (error) {
+  //       toast.error("Something went wrong");
+  //     }
+  //     // } else {
+  //     //   toast.error("Please Enter valid OTP");
+  //     // }
+  //   } else {
+  //     toast.error("Password should contain 0-9,a-z,!,@,# ");
+  //   }
+  // };
 
   useEffect(() => {
     if (email !== "" && password !== "") {
@@ -143,7 +143,7 @@ const ForgetPasswordScreen = () => {
                 ) : (
                   ""
                 )}
-                <Button
+                {/* <Button
                   type="button"
                   variant="primary"
                   disabled={isFormDateDisabled || submitButtonLoading}
@@ -151,7 +151,7 @@ const ForgetPasswordScreen = () => {
                   className="mt-2 w-100"
                 >
                   Submit
-                </Button>
+                </Button> */}
               </>
             )}
             <div className="text-center">
