@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormContainer from "../components/FormContainer";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import {
   useCheckUserExistMutation,
-  useForgetPasswordMutation,
+  // useForgetPasswordMutation,
 } from "../slices/usersApiSlice";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
 import Message from "../components/Message";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import generateOTP from "../utils/generateOtp";
 import CryptoJS from "crypto-js";
@@ -17,16 +17,16 @@ const ForgetPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkEmail, setCheckEmail] = useState(false);
-  const navigate = useNavigate();
-  const [isFormDateDisabled, setIsFormDateDisabled] = useState(true);
-  const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
+  // const navigate = useNavigate();
+  // const [isFormDateDisabled, setIsFormDateDisabled] = useState(true);
+  // const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
   // const [verificationCode, setVerificationCode] = useState("");
 
   const [checkUserExist, { isLoading, error }] = useCheckUserExistMutation();
-  const [
-    forgetPassword,
-    { isLoading: submitButtonLoading, error: forgetPasswordError },
-  ] = useForgetPasswordMutation();
+  // const [
+  //   forgetPassword,
+  //   { isLoading: submitButtonLoading, error: forgetPasswordError },
+  // ] = useForgetPasswordMutation();
   const submitHandler = async (e: any) => {
     e.preventDefault();
     const checkEmail = await checkUserExist({ email }).unwrap();
@@ -87,13 +87,13 @@ const ForgetPasswordScreen = () => {
   //   }
   // };
 
-  useEffect(() => {
-    if (email !== "" && password !== "") {
-      setIsFormDateDisabled(false);
-    } else {
-      setIsFormDateDisabled(true);
-    }
-  }, [email, password]);
+  // useEffect(() => {
+  //   if (email !== "" && password !== "") {
+  //     setIsFormDateDisabled(false);
+  //   } else {
+  //     setIsFormDateDisabled(true);
+  //   }
+  // }, [email, password]);
 
   return (
     <FormContainer comesfrom="true">
@@ -136,13 +136,13 @@ const ForgetPasswordScreen = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </FormGroup>
-                {submitButtonLoading ? (
+                {/* {submitButtonLoading ? (
                   <Loader />
                 ) : forgetPasswordError ? (
                   <Message variant="danger">Something went wrong</Message>
                 ) : (
                   ""
-                )}
+                )} */}
                 {/* <Button
                   type="button"
                   variant="primary"
