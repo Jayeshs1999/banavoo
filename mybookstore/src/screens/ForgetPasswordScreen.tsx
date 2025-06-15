@@ -64,7 +64,7 @@ const ForgetPasswordScreen = () => {
   const handleUpdatePassword = async (e: any) => {
     e.preventDefault();
     //deycrypt id using private key
-    const bytes = CryptoJS.AES.decrypt(
+    // const bytes = CryptoJS.AES.decrypt(
       String(localStorage.getItem("forgetPasswordOtp")),
       `${process.env.ENCRYPTION_KEY}`
     );
