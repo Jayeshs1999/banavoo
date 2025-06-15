@@ -1,6 +1,9 @@
+import  Twilio  from "twilio";
 import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModule.js";
 import fisherYatesShuffle from "../routes/suffleBooks.js";
+
+
 
 //@desc Fetch all products
 //@route GET /api/products
@@ -53,64 +56,99 @@ const getProductsById =asyncHandler( async (req,res)=>{
 //@desc Create a products
 //@route POST /api/products
 //@access Private/Admin
-const createProduct =asyncHandler( async (req,res)=>{
-    const  {
-        name, 
-        email, 
-        phoneNumber,
-        projectTitle,
-        description, 
-        quantity,
-        budget,
-        deliveryDeadline,
-        specialInstructions,
-        image, 
-        address,
-        status="Pending",
-        
-    } = req.body;
-    
-    const product = new Product({
-        name: name,
-        email: email,
-        projectTitle: projectTitle,
-        description: description,
-        quantity: quantity,
-        budget: budget,
-        deliveryDeadline: deliveryDeadline,
-        specialInstructions: specialInstructions,
-        user: req.user._id,
-        image: image? image : 'https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2F26690.jpg?alt=media&token=91f701e4-4f9f-4552-9c40-fdc86f9e3f66&_gl=1*5qo2th*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzYyOTIzMy4yNC4xLjE2OTc2MjkyNjguMjUuMC4w',        
-        address: address,
-        phoneNumber: phoneNumber,
-        status: status,
-    })
 
-    const createProduct = await product.save();
-    res.status(201).json(createProduct)
+const createProduct = asyncHandler(async (req, res) => {
+  const client = Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-})
+  const {
+    name,
+    email,
+    phoneNumber,
+    projectTitle,
+    description,
+    quantity,
+    budget,
+    deliveryDeadline,
+    specialInstructions,
+    image,
+    address,
+    status = "Pending",
+  } = req.body;
+
+  const product = new Product({
+    name,
+    email,
+    projectTitle,
+    description,
+    quantity,
+    budget,
+    deliveryDeadline,
+    specialInstructions,
+    user: req.user._id,
+    image: image || 'https://firebasestorage.googleapis.com/v0/b/bookbucket-5253e.appspot.com/o/images%2F26690.jpg?alt=media&token=91f701e4-4f9f-4552-9c40-fdc86f9e3f66&_gl=1*5qo2th*_ga*MzcyMzM2MzI5LjE2OTI0NTY4ODU.*_ga_CW55HF8NVT*MTY5NzYyOTIzMy4yNC4xLjE2OTc2MjkyNjguMjUuMC4w',
+    address,
+    phoneNumber,
+    status,
+  });
+
+  console.log("projectTitle:", product.projectTitle);
+  console.log("phoneNumber:", product.phoneNumber);
+  console.log("status:", product.status);
+  console.log("TWILIO_PHONE_NUMBER:", process.env.TWILIO_PHONE_NUMBER);
+
+  const messageBody = `Thank you for your order! Your project with title: "${product.projectTitle}" has been received. We will contact you soon at ${product.phoneNumber} to discuss further details.`;
+
+  try {
+    const smsResponse = await client.messages.create({
+      body: messageBody,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: `+91${product.phoneNumber}`,
+    });
+
+    console.log("Message sent successfully:", smsResponse.sid);
+  } catch (err) {
+    console.error("Failed to send SMS:", err.message);
+  }
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
 
 //@desc Update a products
 //@route PUT /api/products/:id
 //@access Private/admin
-const updateProduct =asyncHandler( async (req,res)=>{
-    const  {
-        
-        status="Pending",
-    } = req.body;
+const updateProduct = asyncHandler(async (req, res) => {
+  const { status = "Pending" } = req.body;
+const client = Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-    const product = await Product.findById(req.params.id);
-    if(product) {
-        product.status = status
+  const product = await Product.findById(req.params.id);
 
-        const updateProduct =await product.save();
-        res.json(updateProduct);
-    }else {
-        res.status(404);
-        throw new Error('Resoure not found')
+  if (product) {
+    product.status = status;
+    const updateProduct = await product.save();
+
+    const messageBody = `Your project with title: "${updateProduct.projectTitle}" has been updated to "${updateProduct.status}". Thank you for choosing us!`;
+
+    try {
+      const m = await client.messages.create({
+        body: messageBody,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: `+91${updateProduct.phoneNumber}`,
+      });
+
+      console.log("Message sent successfully:", m);
+    } catch (err) {
+      console.error("Failed to send SMS:", err.message);
     }
-})
+
+    res.json(updateProduct);
+  } else {
+    console.log("not send");
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+});
+
 
 //@desc delete a product
 //@route DELETE /api/products/:id

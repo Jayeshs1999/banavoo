@@ -1,37 +1,43 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
+const ladiesDummyImage =
+  "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?semt=ais_hybrid&w=740";
 
+const menDummyImage =
+  "https://fortmyersradon.com/wp-content/uploads/2019/12/dummy-user-img-1.png";
 const testimonials = [
   {
-    name: "Amit Sharma",
+    name: "Shubham Patil",
     feedback:
       "Absolutely loved the customization! The quality exceeded my expectations.",
-    image: "https://via.placeholder.com/100",
+    image: menDummyImage,
     rating: 5,
   },
   {
     name: "Priya Desai",
     feedback: "Fast delivery and great support. Will order again!",
-    image: "https://via.placeholder.com/100",
+    image: ladiesDummyImage,
     rating: 4,
   },
   {
-    name: "Rahul Verma",
+    name: "Rahul Roy",
     feedback: "Perfect execution of my idea. Highly recommend their service!",
-    image: "https://via.placeholder.com/100",
+    image: menDummyImage,
     rating: 5,
   },
   {
-    name: "Sneha Kapoor",
+    name: "Anjali Singh",
     feedback: "Amazing craftsmanship! My custom mug turned out beautifully.",
-    image: "https://via.placeholder.com/100",
+    image: ladiesDummyImage,
     rating: 5,
   },
 ];
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useTranslation();
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
@@ -55,10 +61,10 @@ export default function Testimonials() {
         }}
       >
         <h2 className="text-5xl font-bold mb-10 text-yellow-400">
-          Customer Testimonials
+          {t("testimonials.title")}{" "}
         </h2>
         <p className="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">
-          See what our happy customers have to say about their experience!
+          {t("testimonials.description")}
         </p>
       </div>
 
@@ -72,8 +78,8 @@ export default function Testimonials() {
           className="flex flex-col items-center"
         >
           <img
-            // src={testimonials[currentIndex].image}
-            src="https://fortmyersradon.com/wp-content/uploads/2019/12/dummy-user-img-1.png"
+            src={testimonials[currentIndex].image}
+            // src="https://fortmyersradon.com/wp-content/uploads/2019/12/dummy-user-img-1.png"
             height={100}
             alt={testimonials[currentIndex].name}
             className="w-24 h-24 object-cover rounded-full border-4 border-yellow-400 mb-4"

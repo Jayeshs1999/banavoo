@@ -1,106 +1,178 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import {
+  tshirt1,
+  tshirt2,
+  // tshirt3,
+  // tshirt4,
+  // tshirt5,
+  office1,
+  office2,
+  // office3,
+  creative1,
+  creative2,
+  creative3,
+  // creative4,
+  // creative5,
+  // art,
+  art1,
+  art2,
+  art3,
+  // art4,
+  bag1,
+  bag2,
+  // bag3,
+  ladies1,
+  ladies2,
+  // ladies3,
+  fur1,
+  fur2,
+  fur3,
+  // fur4,
+  suit,
+  // logo,
+  logo1,
+  website1,
+  website2,
+  box1,
+  d3,
+  // Image,
+  // adv,
+} from "../assets";
+import { useState } from "react";
 
 const showcaseItems = [
   {
-    title: "Customized T-Shirt",
+    title: "T-Shirt Collection",
     description: "Design your own t-shirt with unique artwork and prints.",
-    image:
-      "   https://thebanyantee.com/cdn/shop/files/Black-T-shirt.jpg?v=1721380366",
+    image: tshirt1,
   },
   {
-    title: "Customized T-Shirt",
-    description: "Design your own t-shirt with unique artwork and prints.",
-    image:
-      "https://www.deshidukan.in/cdn/shop/files/male-model-wearing-white-tshirt-posing-in-front-pink-curtain-00192_16_1200x1200.jpg?v=1718261128",
+    title: "Office Collection",
+    description: "Professional wear for the modern workplace.",
+    image: office1,
   },
   {
-    title: "Custom Wooden Frame",
-    description:
-      "A beautifully crafted wooden frame with personalized engravings.",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/9/344228644/MR/MG/HN/76979556/untitled-design-1-1-500x500.png",
+    title: "Creative Designs",
+    description: "Unique and artistic designs for your style.",
+    image: creative1,
   },
   {
-    title: "Wooden Window",
-    description: "A beautifully Wooden window .",
-    image:
-      "https://www.wombatframes.com/cdn/shop/products/Recycled_Australian_timber_handmade_photoframe.jpg?v=1561429374",
+    title: "Artistic Collection",
+    description: "Express yourself with our artistic designs.",
+    image: art1,
   },
   {
-    title: "Custom Wooden Frame",
-    description:
-      "A beautifully crafted wooden frame with personalized engravings.",
-    image:
-      "https://www.americanframe.com/media/catalog/category/Header-050b.png",
+    title: "Bag Collection",
+    description: "Stylish and functional bags for every occasion.",
+    image: bag1,
   },
   {
-    title: "Custom Wooden Frame",
-    description:
-      "A beautifully crafted wooden frame with personalized engravings.",
-    image:
-      "https://www.woodshopdiaries.com/wp-content/uploads/2022/07/Large-custom-framed-photos-on-back-wall.jpg",
+    title: "Ladies Collection",
+    description: "Elegant designs for women.",
+    image: ladies1,
   },
   {
-    title: "Wooden Table",
-    description: "A beautifully crafted wooden table",
-    image:
-      " https://www.kenro.co.uk/cdn/shop/files/RoundTable_0492__web_grande.jpg?v=1709303843",
+    title: "Fur Collection",
+    description: "Luxurious fur designs for special occasions.",
+    image: fur1,
   },
   {
-    title: "Wooden Table",
-    description: "A beautifully crafted wooden table.",
-    image:
-      " https://www.hindustantimes.com/ht-img/img/2024/05/22/550x309/center_tables_for_living_room_1716354135178_1716354150079.jpg",
+    title: "Professional Suits",
+    description: "Premium suits for the modern professional.",
+    image: suit,
   },
   {
-    title: "Wooden Table",
-    description: "A beautifully crafted wooden table.",
-    image:
-      "  https://ahdfurniture.com/wp-content/uploads/2024/05/WhatsApp-Image-2025-02-28-at-12.11.14-AM-500x375.jpeg",
+    title: "Website Designs",
+    description: "Modern and responsive website designs.",
+    image: website1,
   },
+  {
+    title: "Box Collection",
+    description: "Unique box designs for special occasions.",
+    image: box1,
+  },
+  {
+    title: "3D Designs",
+    description: "Innovative 3D designs for your needs.",
+    image: d3,
+  },
+];
 
+const alternativeShowcaseItems = [
   {
-    title: "Customized Gift",
-    description: "Design your own gift with unique artwork and prints.",
-    image:
-      "  https://images-cdn.ubuy.co.in/656f644c0a19791e1b1580d2-gift-for-friend-friendship-gifts-for.jpg",
+    title: "T-Shirt Collection 2",
+    description: "More unique t-shirt designs for you.",
+    image: tshirt2,
   },
   {
-    title: "Customized gift",
-    description: "Design your own gift with unique artwork and prints.",
-    image:
-      "  https://d1jcea4y7xhp7l.cloudfront.net/wp-content/uploads/2024/12/IMG-20241223-WA0000.jpg",
+    title: "Office Style 2",
+    description: "Additional office wear options.",
+    image: office2,
+  },
+  {
+    title: "Creative Designs 2",
+    description: "More creative options for your style.",
+    image: creative2,
+  },
+  {
+    title: "Art Collection 2",
+    description: "Additional artistic designs.",
+    image: art2,
+  },
+  {
+    title: "Bag Collection 2",
+    description: "More bag designs to choose from.",
+    image: bag2,
+  },
+  {
+    title: "Ladies Collection 2",
+    description: "More elegant designs for women.",
+    image: ladies2,
+  },
+  {
+    title: "Fur Collection 2",
+    description: "Additional fur designs.",
+    image: fur2,
+  },
+  {
+    title: "Website Designs 2",
+    description: "More website design options.",
+    image: website2,
+  },
+  {
+    title: "Logo Designs",
+    description: "Professional logo designs.",
+    image: logo1,
+  },
+  {
+    title: "Art Collection 3",
+    description: "Premium artistic designs.",
+    image: art3,
+  },
+  {
+    title: "Creative Designs 3",
+    description: "Innovative creative designs.",
+    image: creative3,
+  },
+  {
+    title: "Fur Collection 3",
+    description: "Luxurious fur designs.",
+    image: fur3,
   },
 ];
 
 export default function Showcase() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useTranslation();
+  const [showAlternative, setShowAlternative] = useState(false);
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? showcaseItems.length - 1 : prev - 1
-    );
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === showcaseItems.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  // Automatically move the carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000); // Change slide every 3 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
+  // Duplicate items for infinite effect
+  const duplicatedItems = showAlternative
+    ? [...alternativeShowcaseItems, ...alternativeShowcaseItems]
+    : [...showcaseItems, ...showcaseItems];
 
   return (
-    <div className="relative py-20 bg-gray-100 text-gray-900 text-center pb-3">
+    <div className="relative py-20 bg-gray-100 text-gray-900 text-center overflow-hidden">
       <div
         className="p-3 mb-3"
         style={{
@@ -108,70 +180,51 @@ export default function Showcase() {
           background: "linear-gradient(45deg, red, transparent)",
         }}
       >
-        <h2 className="text-5xl font-bold mb-10 text-indigo-600">Showcase</h2>
-        <p className="text-lg mb-12 text-gray-600 max-w-2xl mx-auto">
-          Explore some of our customized creations to inspire your next idea.
+        <h2 className="text-5xl font-bold mb-4 text-indigo-600">
+          {t("showCase")}
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          {t(
+            "Explore_some_of_our_customized_creations_to_inspire_your_next_idea"
+          )}
         </p>
+        <button
+          onClick={() => setShowAlternative(!showAlternative)}
+          className="mt-4 px-6 py-2  rounded-lg hover:bg-indigo-700 transition-colors"
+        >
+          {showAlternative
+            ? "Show First Collection"
+            : "Show Alternative Collection"}
+        </button>
       </div>
 
-      <div className="relative max-w-3xl mx-auto overflow-hidden rounded-lg shadow-xl">
+      <div className="relative w-full overflow-hidden">
         <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5 }}
-          className="relative flex flex-col items-center bg-white p-8 rounded-lg"
+          className="flex gap-6"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            duration: 40,
+            ease: "linear",
+          }}
+          style={{ width: "max-content", display: "flex" }}
         >
-          <img
-            height={300}
-            // width={500}
-            src={showcaseItems[currentIndex].image}
-            alt={showcaseItems[currentIndex].title}
-            className="w-64 h-64 object-cover rounded-lg shadow-md mb-6"
-          />
-          <h3 className="text-2xl font-bold mb-2 mt-2">
-            {showcaseItems[currentIndex].title}
-          </h3>
-          <p className="text-gray-600">
-            {showcaseItems[currentIndex].description}
-          </p>
+          {duplicatedItems.map((item, index) => (
+            <div
+              key={index}
+              className="min-w-[250px] bg-white p-4 rounded-xl shadow-md flex-shrink-0"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{ width: "200px", height: "200px" }}
+                className="w-full h-48 object-cover rounded-lg mb-3"
+              />
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="text-sm text-gray-500">{item.description}</p>
+            </div>
+          ))}
         </motion.div>
-      </div>
-      <div
-        className="mt-6 flex justify-center gap-6"
-        style={{ display: "flex", gap: "10px", justifyContent: "center" }}
-      >
-        <button
-          onClick={prevSlide}
-          style={{
-            padding: "8px",
-            backgroundColor: "#6366F1",
-            borderRadius: "999px",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-            display: "inline-block",
-            marginTop: "20px",
-            cursor: "pointer",
-            transition: "background 0.3s ease",
-          }}
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          style={{
-            padding: "8px",
-            backgroundColor: "#6366F1",
-            borderRadius: "999px",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-            display: "inline-block",
-            marginTop: "20px",
-            cursor: "pointer",
-            transition: "background 0.3s ease",
-          }}
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </div>
     </div>
   );

@@ -1,10 +1,7 @@
 import React from "react";
-import { useGetTopProductsQuery } from "../slices/productsAPISlice";
 import { Carousel, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import {
   banner1,
-  banner2,
   banner3,
   banner4,
   banner5,
@@ -65,23 +62,28 @@ const ProductCorousel = () => {
     },
   ];
   return (
-    <Carousel pause="hover" className="bg-error mb-4 carousel-background">
+    <Carousel
+      pause="hover"
+      nextIcon={null}
+      prevIcon={null}
+      className="bg-error mb-4 carousel-background"
+    >
       {products &&
         products.map((product: any) => (
           <Carousel.Item key={product._id} className="custom-carousel-item">
-            <Link to={`product/${product._id}`}>
-              <Image
-                src={product.image}
-                alt={product.name}
-                className="custom-image"
-              />
+            {/* <Link to={``}> */}
+            <Image
+              src={product.image}
+              alt={product.name}
+              className="custom-image"
+            />
 
-              {/* <Carousel.Caption className="carousel-caption">
+            {/* <Carousel.Caption className="carousel-caption">
                 <h2>
                   {product.name} (Rs.{product.price})
                 </h2>
               </Carousel.Caption> */}
-            </Link>
+            {/* </Link> */}
           </Carousel.Item>
         ))}
     </Carousel>

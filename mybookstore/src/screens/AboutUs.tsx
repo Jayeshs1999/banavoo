@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function AboutUs() {
+  const { t } = useTranslation();
   return (
     <section
       style={{
@@ -25,7 +27,7 @@ export default function AboutUs() {
           marginBottom: "15px",
         }}
       >
-        About <span style={{ color: "#ff7f50" }}>Banavoo</span>
+        {t("About")} <span style={{ color: "#ff7f50" }}>Banavoo</span>
       </motion.h2>
 
       {/* Description */}
@@ -42,8 +44,8 @@ export default function AboutUs() {
       >
         At <strong>Banavoo</strong>, we believe in turning imagination into
         reality! Whether it's a <strong>custom product</strong>,{" "}
-        <strong>a unique design</strong>, or
-        <strong>bulk orders</strong>, we craft every detail to perfection. Your{" "}
+        <strong>a unique design</strong>, or <strong>bulk orders</strong>, we
+        craft every detail to perfection. Your{" "}
         <strong>ideas, our innovation!</strong>
       </motion.p>
 

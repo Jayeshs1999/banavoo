@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 export default function CallToAction() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative py-20 bg-gradient-to-br from-blue-600 to-purple-800  text-center">
       <motion.div
@@ -49,7 +51,7 @@ export default function CallToAction() {
             navigate("/customization");
           }}
         >
-          Get Started <ArrowRight className="w-6 h-6" />
+          {t("getStarted")} <ArrowRight className="w-6 h-6" />
         </motion.button>
       </motion.div>
     </div>

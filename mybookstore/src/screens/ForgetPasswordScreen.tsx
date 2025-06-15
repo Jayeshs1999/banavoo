@@ -12,7 +12,6 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import generateOTP from "../utils/generateOtp";
 import CryptoJS from "crypto-js";
-import sendEmail from "../utils/sendEmail";
 
 const ForgetPasswordScreen = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +20,7 @@ const ForgetPasswordScreen = () => {
   const navigate = useNavigate();
   const [isFormDateDisabled, setIsFormDateDisabled] = useState(true);
   const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
-  const [verificationCode, setVerificationCode] = useState("");
+  // const [verificationCode, setVerificationCode] = useState("");
 
   const [checkUserExist, { isLoading, error }] = useCheckUserExistMutation();
   const [
@@ -69,7 +68,7 @@ const ForgetPasswordScreen = () => {
       String(localStorage.getItem("forgetPasswordOtp")),
       `${process.env.ENCRYPTION_KEY}`
     );
-    const originalKey = bytes.toString(CryptoJS.enc.Utf8);
+    // const originalKey = bytes.toString(CryptoJS.enc.Utf8);
     if (password.match(passwordPattern)) {
       // if (verificationCode === originalKey) {
       try {
@@ -94,7 +93,7 @@ const ForgetPasswordScreen = () => {
     } else {
       setIsFormDateDisabled(true);
     }
-  }, [email, password, verificationCode]);
+  }, [email, password]);
 
   return (
     <FormContainer comesfrom="true">

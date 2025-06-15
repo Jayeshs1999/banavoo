@@ -1,56 +1,45 @@
 import { motion } from "framer-motion";
 import {
-  CheckCircle,
-  ArrowRight,
-  FileText,
-  Eye,
   Hammer,
-  Package,
-  Truck,
-  Gift,
-  Send,
   Layers,
   ShoppingCart,
   Headphones,
   Settings,
 } from "lucide-react";
 import useDeviceType from "../utils/DeviceType";
-
-const services = [
-  {
-    title: "Custom Product Design",
-    description:
-      "Personalize any item with your unique designs, from frames to t-shirts, mugs, and more.",
-    icon: <Layers className="w-12 h-12 text-blue-500" />,
-  },
-  {
-    title: "Bulk Order Processing",
-    description:
-      "Accepting large-scale orders for businesses, events, and corporate gifting.",
-    icon: <ShoppingCart className="w-12 h-12 text-yellow-500" />,
-  },
-  {
-    title: "Prototype & Sample Creations",
-    description:
-      "Get a prototype before finalizing your bulk order. Ideal for testing and refinement.",
-    icon: <Hammer className="w-12 h-12 text-purple-500" />,
-  },
-  {
-    title: "Full End-to-End Support",
-    description:
-      "Consultation, design, production, quality check, and fast doorstep delivery.",
-    icon: <Headphones className="w-12 h-12 text-green-500" />,
-  },
-  {
-    title: "On-Demand Customization",
-    description:
-      "Modify existing products or create entirely new ones with our expert team.",
-    icon: <Settings className="w-12 h-12 text-teal-500" />,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function OurServices() {
   const deviceType = useDeviceType();
+  const { t } = useTranslation();
+
+  const services = [
+    {
+      title: t("services.customProductDesign.title"),
+      description: t("services.customProductDesign.description"),
+      icon: <Layers className="w-12 h-12 text-blue-500" />,
+    },
+    {
+      title: t("services.bulkOrderProcessing.title"),
+      description: t("services.bulkOrderProcessing.description"),
+      icon: <ShoppingCart className="w-12 h-12 text-yellow-500" />,
+    },
+    {
+      title: t("services.prototypeCreation.title"),
+      description: t("services.prototypeCreation.description"),
+      icon: <Hammer className="w-12 h-12 text-purple-500" />,
+    },
+    {
+      title: t("services.fullSupport.title"),
+      description: t("services.fullSupport.description"),
+      icon: <Headphones className="w-12 h-12 text-green-500" />,
+    },
+    {
+      title: t("services.onDemandCustomization.title"),
+      description: t("services.onDemandCustomization.description"),
+      icon: <Settings className="w-12 h-12 text-teal-500" />,
+    },
+  ];
   return (
     <div className="relative py-20 bg-gray-900 pt-2 ">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-700 opacity-50"></div>
@@ -63,11 +52,10 @@ export default function OurServices() {
           }}
         >
           <h2 className="text-5xl font-bold mb-10 text-yellow-400 drop-shadow-lg">
-            Our Services
+            {t("ourServices")}
           </h2>
           <p className="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">
-            From small personalized gifts to large-scale bulk orders, we bring
-            your creativity to life.
+            {t("services.description")}
           </p>
         </div>
 

@@ -21,8 +21,7 @@ export default function CustomizationForm() {
     files: null,
     address: "",
   };
-  const [createProduct, { isLoading: loadingCreate }] =
-    useCreateProductMutation();
+  const [createProduct] = useCreateProductMutation();
 
   const deviceType = useDeviceType();
   const [formData, setFormData] = useState(initialFormState);
@@ -58,9 +57,9 @@ export default function CustomizationForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e: any) => {
-    setFormData({ ...formData, files: e.target.files });
-  };
+  // const handleFileChange = (e: any) => {
+  //   setFormData({ ...formData, files: e.target.files });
+  // };
 
   const handleSubmit = (e: any) => {
     console.log("Form submitted", formData);

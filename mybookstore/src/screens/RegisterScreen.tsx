@@ -15,9 +15,7 @@ import { useRegisterMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
-import generateOTP from "../utils/generateOtp";
 import CryptoJS from "crypto-js";
-import sendEmail from "../utils/sendEmail";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");

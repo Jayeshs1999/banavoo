@@ -1,22 +1,13 @@
 import { motion } from "framer-motion";
-import {
-  CheckCircle,
-  ArrowRight,
-  FileText,
-  Eye,
-  Hammer,
-  Package,
-  Truck,
-  Gift,
-  Send,
-} from "lucide-react";
+import { FileText, Eye, Hammer, Package, Truck, Gift } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const HowItWorks = () => {
+  const { t } = useTranslation();
   const steps = [
     {
-      title: "Fill the Form",
-      description:
-        "Provide your name, email, WhatsApp/contact number, design description, and upload a sample picture, then submit the form.",
+      title: t("form.fillInstruction"),
+      description: t("form.instruction"),
       icon: (
         <FileText
           className="w-10 h-10 text-blue-500"
@@ -26,9 +17,8 @@ const HowItWorks = () => {
       color: "#242489",
     },
     {
-      title: "Pending Review",
-      description:
-        "Your design is in the pending state. Our team will review your submission shortly.",
+      title: t("status.pendingReview"),
+      description: t("status.pendingReviewDesc"),
       icon: (
         <Eye
           className="w-10 h-10 text-yellow-500"
@@ -38,9 +28,8 @@ const HowItWorks = () => {
       color: "#e7663c",
     },
     {
-      title: "Design Under Review",
-      description:
-        "Our team checks your design. During this phase, your status is 'Viewed'. We will contact you via WhatsApp or phone to finalize the details.",
+      title: t("status.underReview"),
+      description: t("status.underReviewDesc"),
       icon: (
         <Eye
           className="w-10 h-10 text-orange-500"
@@ -50,9 +39,8 @@ const HowItWorks = () => {
       color: "#FFA500",
     },
     {
-      title: "In Progress",
-      description:
-        "Once everything is confirmed, we start crafting your custom order with precision and care.",
+      title: t("status.inProgress"),
+      description: t("status.inProgressDesc"),
       icon: (
         <Hammer
           className="w-10 h-10 text-purple-500"
@@ -62,9 +50,8 @@ const HowItWorks = () => {
       color: "#800080",
     },
     {
-      title: "Quality Check & Packing",
-      description:
-        "Your product undergoes a quality check before getting packed securely for delivery.",
+      title: t("status.qualityCheck"),
+      description: t("status.qualityCheckDesc"),
       icon: (
         <Package
           className="w-10 h-10 text-green-500"
@@ -74,9 +61,8 @@ const HowItWorks = () => {
       color: "#008000",
     },
     {
-      title: "Out for Delivery",
-      description:
-        "Your order is on its way to your doorstep. Track the delivery in real-time.",
+      title: t("status.outForDelivery"),
+      description: t("status.outForDeliveryDesc"),
       icon: (
         <Truck
           className="w-10 h-10 text-indigo-500"
@@ -86,9 +72,8 @@ const HowItWorks = () => {
       color: "#4B0082",
     },
     {
-      title: "Delivered",
-      description:
-        "Your custom creation has arrived! Enjoy your personalized product!",
+      title: t("status.delivered"),
+      description: t("status.deliveredDesc"),
       icon: (
         <Gift
           className="w-10 h-10 text-teal-500"
@@ -108,7 +93,7 @@ const HowItWorks = () => {
           background: "linear-gradient(45deg, red, transparent)",
         }}
       >
-        How It Works
+        {t("howItWorks")}
       </h2>
       <div className="grid md:grid-cols-4 gap-6 mt-3">
         {steps?.map((step, index) => (

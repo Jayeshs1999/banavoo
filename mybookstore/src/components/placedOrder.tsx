@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   useDeleteProductMutation,
@@ -14,11 +14,6 @@ export default function PlacedOrders() {
     fontWeight: "bold",
     color: "#333",
     marginBottom: "20px",
-  };
-
-  const tableStyle = {
-    width: "100%",
-    borderCollapse: "collapse",
   };
 
   const thStyle = {
@@ -38,14 +33,12 @@ export default function PlacedOrders() {
     borderBottom: "1px solid #ddd",
   };
   const { userInfo } = useSelector((state: any) => state.auth);
-  const { data, isLoading, refetch } = useGetProductsQuery({
+  const { data, refetch } = useGetProductsQuery({
     userId: !Boolean(userInfo.isAdmin) ? userInfo._id : "",
   });
 
-  const [updateProduct, { isLoading: loadingUpdate }] =
-    useUpdateProductMutation();
-  const [deleteProduct, { isLoading: loadingDelete }] =
-    useDeleteProductMutation();
+  const [updateProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
   const orders = data?.products;
 
@@ -67,7 +60,7 @@ export default function PlacedOrders() {
     "Pending",
     "In Review",
     "In Discussion",
-    "Completed",
+    "In Progress",
     "Out for Delivery",
     "Delivered",
     "Cancelled",
@@ -76,7 +69,7 @@ export default function PlacedOrders() {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   const handleStatusChange = async (orderId: any, newStatus: any) => {
     /**

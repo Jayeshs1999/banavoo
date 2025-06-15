@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 interface BanavooButtonProps {
@@ -31,7 +30,6 @@ const BanavooButton = ({
     y: [0, -5, 0], // Moves the button up and down slightly
   },
 }: BanavooButtonProps) => {
-  const navigate = useNavigate();
   return (
     <div
       style={{
