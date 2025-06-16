@@ -11,12 +11,14 @@ import {
     deleteUser,
     updateUser,
     checkEmailExist,
-    forgetPassword
+    forgetPassword,
+    googleAuth
 
  } from "../controllers/userController.js";
  import { protect, admin} from '../middleware/authMiddleware.js';
 
 router.route('/').post(registerUser).get(protect, admin, getUsers);
+router.post('/google', googleAuth);
 router.post('/forgetpassword',checkEmailExist).put('/forgetpassword',forgetPassword)
 router.post('/logout',logoutUser);
 router.post('/login',authUser);

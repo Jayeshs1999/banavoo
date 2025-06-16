@@ -96,6 +96,43 @@ const registerUser =asyncHandler( async (req,res)=>{
     }
 })
 
+
+// POST /api/users/google
+const googleAuth = asyncHandler(async (req, res) => {
+  const { name, email, googleId, profilePic } = req.body;
+
+  if (!email || !googleId) {
+    res.status(400);
+    throw new Error("Invalid Google auth payload");
+  }
+
+  let user = await User.findOne({ email });
+
+  if (!user) {
+    // Create new user
+    user = await User.create({
+      name,
+      email,
+      password: null, // or generate a random string, if required
+      googleId,
+      profilePic,
+    });
+  } else if (!user.googleId) {
+    // Link googleId if not already linked
+    user.googleId = googleId;
+    await user.save();
+  }
+
+  generateToken(res, user._id); // Use your existing JWT token generator
+
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  });
+});
+
 //@desc logout user / clear cookie
 //@route POST /api/users/logout
 //@access private
@@ -228,6 +265,7 @@ export {
     deleteUser,
     updateUser,
     checkEmailExist,
-    forgetPassword
+    forgetPassword,
+    googleAuth
 }
 

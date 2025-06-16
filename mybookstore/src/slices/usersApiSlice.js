@@ -26,6 +26,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
+        googleLogin: builder.mutation({
+        query: (data) => ({
+            url: `${USERS_URL}/google`,
+            method: 'POST',
+            body: data,
+        }),
+        }),
+
         profile: builder.mutation({ //making post request
             query: (data) => ({
                 url: `${USERS_URL}/profile`,
@@ -95,6 +103,6 @@ export const {useLoginMutation,
      useUpdatedUserMutation,
      useCheckUserExistMutation,
      useForgetPasswordMutation,
-     
+     useGoogleLoginMutation,
      useRegisterMutation} = usersApiSlice;
 

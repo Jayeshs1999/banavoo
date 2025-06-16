@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
         required: true,
         default:false
     },
+    googleId: {
+        type: String,
+        required: false
+    },
+    profilePic: {
+        type: String,
+        required: false,
+    }
 },{
     timestamps: true
 })

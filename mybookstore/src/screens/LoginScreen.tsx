@@ -3,10 +3,15 @@ import FormContainer from "../components/FormContainer";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../slices/usersApiSlice";
+import {
+  useGoogleLoginMutation,
+  useLoginMutation,
+} from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../utils/firebase";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +20,8 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
+  const [googleLogin] = useGoogleLoginMutation();
+
   const { userInfo } = useSelector((state: any) => state.auth);
 
   const { search } = useLocation();
@@ -36,6 +43,28 @@ const LoginScreen = () => {
       navigate(redirect);
     } catch (error: any) {
       toast.error(error?.data?.message || error.error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Send this data to your backend to sync with MongoDB
+      const data = await googleLogin({
+        name: user.displayName,
+        email: user.email,
+        googleId: user.uid,
+        profilePic: user.photoURL,
+      }).unwrap();
+      dispatch(setCredentials({ ...data }));
+      navigate(redirect);
+
+      console.log("User synced with backend:", data);
+      // Save token or do redirection
+    } catch (err) {
+      console.error("Google sign-in failed:", err);
     }
   };
 
@@ -100,6 +129,28 @@ const LoginScreen = () => {
             </Link>
           </Col>
         </Row>
+        <div className="px-3 pb-3">
+          <Button
+            onClick={handleGoogleLogin}
+            variant="outline-dark"
+            className="w-100 d-flex align-items-center justify-content-center gap-2"
+            style={{
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              color: "black",
+              backgroundColor: "#e74c3c",
+              transition: "all 0.3s ease",
+            }}
+          >
+            <img
+              src="https://www.google.com/favicon.ico"
+              alt="Google"
+              style={{ width: "20px", height: "20px" }}
+            />
+            Sign in with Google
+          </Button>
+        </div>
       </Card>
     </FormContainer>
   );
