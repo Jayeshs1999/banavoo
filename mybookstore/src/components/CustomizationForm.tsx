@@ -130,6 +130,32 @@ export default function CustomizationForm() {
       <h2 style={{ color: "#333", textAlign: "center", marginBottom: "20px" }}>
         Customize Your Product
       </h2>
+      <div style={{ marginBottom: "20px" }}>
+        <div
+          className="alert alert-info"
+          role="alert"
+          style={{
+            fontSize: "1rem",
+            background: "#e9f7fe",
+            color: "#0c5460",
+            border: "1px solid #b8daff",
+          }}
+        >
+          No need to upload your design! Our team will connect with you via
+          WhatsApp or another app to discuss your requirements and collect any
+          images or details needed.
+        </div>
+        <p
+          style={{
+            margin: 0,
+            color: "#333",
+            fontSize: "1rem",
+            fontWeight: 500,
+          }}
+        >
+          Just fill the below form.
+        </p>
+      </div>
       {/* <div className="d-flex align-items-center justify-content-center mb-4">
         
        

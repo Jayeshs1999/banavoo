@@ -86,7 +86,7 @@
   "form.instruction": "Provide your name, email, WhatsApp/contact number, design description, and upload a sample picture, then submit the form.",
   "status.pendingReview": "Pending Review",
   "status.pendingReviewDesc": "Your design is in the pending state. Our team will review your submission shortly.",
-  "status.underReview": "Design Under Review",
+  "status.underReview": "Design Under Review (In Review) & (In Discussion)",
   "status.underReviewDesc": "Our team checks your design. During this phase, your status is 'Viewed'. We will contact you via WhatsApp or phone to finalize the details.",
   "status.inProgress": "In Progress",
   "status.inProgressDesc": "Once everything is confirmed, we start crafting your custom order with precision and care.",
