@@ -70,10 +70,17 @@ const LoginScreen = () => {
 
   return (
     <FormContainer comesfrom="true">
-      <Card className="mt-5" style={{ display: "flex", borderRadius: "10px" }}>
+      <Card
+        className="text-center shadow-lg p-4 rounded-4 border-0"
+        // style={{ background: "#f0f4ff" }}
+        style={{
+          display: "flex",
+          borderRadius: "10px",
+        }}
+      >
         <Card.Body>
-          <h1 className="text-center">Sign In</h1>
-          <Form onSubmit={submitHandler}>
+          {/* <h1 className="text-center">Sign In</h1> */}
+          {/* <Form onSubmit={submitHandler}>
             <FormGroup controlId="email" className="my-3">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
@@ -116,10 +123,10 @@ const LoginScreen = () => {
             </div>
 
             {isLoading && <Loader />}
-          </Form>
+          </Form> */}
         </Card.Body>
 
-        <Row className="py-3">
+        {/* <Row className="py-3">
           <Col className="text-center">
             New User?{" "}
             <Link
@@ -128,7 +135,15 @@ const LoginScreen = () => {
               Register
             </Link>
           </Col>
-        </Row>
+        </Row> */}
+        <Card.Title className="fs-3 fw-bold text-primary">
+          Your first order is just a click away ✨
+        </Card.Title>
+        <Card.Text className="fs-5 text-dark">
+          Let’s bring your ideas to life with stunning custom creations!
+        </Card.Text>
+        {isLoading && <Loader />}
+
         <div className="px-3 pb-3">
           <Button
             onClick={handleGoogleLogin}

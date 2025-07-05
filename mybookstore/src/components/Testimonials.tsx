@@ -93,8 +93,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          We're grateful for the trust of countless customers who have chosen us
-          for their custom creations.
+          {t("greeting_message")}
         </motion.p>
         <motion.p
           className="text-lg text-gray-400 max-w-xl"
@@ -103,9 +102,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
         >
-          While we can't showcase every story here, each one inspires us to keep
-          delivering exceptional experiences. Thank you for being a part of our
-          journey!
+          {t("greeting_message_placeholder")}
         </motion.p>
       </motion.div>
     </div>

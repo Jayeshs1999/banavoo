@@ -79,22 +79,22 @@
   "Login/Signup": "साइन इन/साइन अप",
   "getStarted": "सुरू करा",
   "showCase": "प्रदर्शन",
-  "Explore_some_of_our_customized_creations_to_inspire_your_next_idea":"तुमच्या पुढील कल्पनेला प्रेरणा देण्यासाठी आमच्या काही सानुकूलित निर्मिती गोष्टी एक्सप्लोर करा.",
-  "howItWorks": "हे कसे कार्य करते",
-  "form.fillInstruction": "फॉर्म भरा",
-  "form.instruction": "तुमचे नाव, ईमेल, WhatsApp/संपर्क क्रमांक, डिझाइनचे वर्णन आणि एक नमुना चित्र असेल तर ते अपलोड करा, आणि त्यानंतर तुमचा फॉर्म सबमिट करा.",
-  "status.pendingReview": "तुम्ही दिलेली ऑर्डर तपासात आहोत (Pending Review)",
-  "status.pendingReviewDesc": "तुमची डिझाइन सध्या प्रलंबित स्थितीत आहे. आमचा संघ लवकरच तुमची डिझाइन तपासेल.",
-  "status.underReview": "डिझाइनचे परीक्षण सुरू आहे (In Review) & (In Discussion)",
-  "status.underReviewDesc": "आमचा संघ आपले डिझाइन/ऑर्डर  तपासत आहे. या टप्प्यात, आपली स्थिती `In Review` अशी असेल. अंतिम निर्णयासाठी आम्ही WhatsApp किंवा फोनद्वारे संपर्क करू.",
-  "status.inProgress": "काम सुरू आहे(In Progress)",
-  "status.inProgressDesc": "सर्व तपशील निश्चित झाल्यानंतर, आम्ही तुमचे सानुकूल ऑर्डर काळजीपूर्वक तयार करायला सुरुवात करू.",
-  "status.qualityCheck": "गुणवत्ता तपासणी व पॅकिंग (Quality Check & Packing)",
-  "status.qualityCheckDesc": "तुमच्या ऑर्डरची गुणवत्ता तपासली जाईल आणि नंतर सुरक्षितपणे पॅक केले जाईल.",
-  "status.outForDelivery": "डिलिव्हरीसाठी रवाना (Out for Delivery)",
-  "status.outForDeliveryDesc": "तुमची ऑर्डर आम्ही पाठवली असेल .",
-  "status.delivered": "पोहोचले (Delivered)",
-  "status.deliveredDesc": "आपले सानुकूल Order पोहोचले असेल!",
+  "Explore_some_of_our_customized_creations_to_inspire_your_next_idea":"तुमच्या पुढील कल्पनेला प्रेरणा देण्यासाठी आम्ही बनवलेल्या काही गोष्टी तुम्ही इथे बघू शकता.",
+  "howItWorks": "हे अँप्लिकेशन कसे कार्य करते",
+  "form.fillInstruction": "पहिले तुम्हाला फॉर्म भरावा लागेल",
+  "form.instruction": "तुमचे नाव, ईमेल, WhatsApp/संपर्क क्रमांक आणि डिझाइनचे वर्णन, आणि त्यानंतर तुमचा फॉर्म सबमिट करा.",
+  "status.pendingReview": "Pending Review",
+  "status.pendingReviewDesc": "या Stage मध्ये आम्ही तुम्ही दिलेली ऑर्डर तपासणार आहोत, त्यामुळे तुम्हाला तुमच्या ऑर्डर लिस्ट मध्ये Pending Review स्टेटस दिसेल.",
+  "status.underReview": "Design Under Review (In Review) & (In Discussion)",
+  "status.underReviewDesc": "या Stage मध्ये आमची टीम आपले डिझाइन/ऑर्डर  तपासत आहे. या टप्प्यात, तुम्हाला तुमच्या ऑर्डर च स्टेटस  `In Review` आणि `In Discussion` अस असेल. अंतिम निर्णयासाठी आम्ही WhatsApp किंवा फोनद्वारे संपर्क करू.",
+  "status.inProgress": "In Progress",
+  "status.inProgressDesc": "या Stage मध्ये आपलं दोघांचं बोलणं पूर्ण झाल्यानंतर आम्ही तुमची ऑर्डर बनवायला सुरुवात करू. ",
+  "status.qualityCheck": "Quality Check & Packing",
+  "status.qualityCheckDesc": "या Stage मध्ये तुम्ही ऑर्डर दिलेली वस्तू बनवून झाल्यानंतर आम्ही तुमची ऑर्डर तपासून घेऊ आणि सुरक्षितपणे pack करू.",
+  "status.outForDelivery": "Out for Delivery",
+  "status.outForDeliveryDesc": "या Stage मध्ये आम्ही तुमची ऑर्डर आम्ही पाठवली असेल.",
+  "status.delivered": "Delivered",
+  "status.deliveredDesc": "आमचा डिलिव्हरी बॉय तुमची ऑर्डर delivered  करेल.",
 
   "services.customProductDesign.title": "कस्टम डिझाइन",
   "services.customProductDesign.description": "फ्रेम्सपासून ते  टी-शर्ट पर्यंत, वेबसाईट पासून ते  सॉफ्टवेअर पर्यंत, घर बांधण्यापासून ते  पासून ते  furniture पर्यंत  आणि बरेच काही, तुमच्या अद्वितीय डिझाइनसह कोणतीही वस्तू वैयक्तिकृत करा.",
@@ -103,7 +103,7 @@
   "services.bulkOrderProcessing.description": "व्यवसाय, इव्हेंट्स आणि कॉर्पोरेट गिफ्टिंगसाठी मोठ्या प्रमाणातील कोणत्याही ऑर्डर स्वीकारल्या जातात.",
 
   "services.prototypeCreation.title": "प्रोटोटाइप व नमुना",
-  "services.prototypeCreation.description": "आमच्या क्रीटीव्हिटी नुसार आम्ही तुमच्या बल्क ऑर्डर चा प्रोटोटाइप किंवा design तयार करून देऊ . .",
+  "services.prototypeCreation.description": "आमच्या क्रीटीव्हिटी नुसार आम्ही तुमच्या बल्क ऑर्डर चा प्रोटोटाइप किंवा design तयार करून देऊ.",
 
   "services.fullSupport.title": "सेवा समर्थन",
   "services.fullSupport.description": "सल्लामसलत, डिझाइन, उत्पादन, गुणवत्ता तपासणी आणि जलद होम डिलिव्हरी.",
@@ -112,7 +112,9 @@
   "services.onDemandCustomization.description": "आमच्या क्रीटीव्ह टीमसोबत बसून नवीन design किंवा प्रोटोटाईप   तयार करा आणि तुमच्या आवडीची गोस्ट तयार करून घ्या.",
   "services.description": "छोट्या वैयक्तिकृत वस्तू/भेटवस्तूंपासून ते मोठ्या प्रमाणातील ऑर्डरपर्यंत, आम्ही सर्व काही सेवा पुरवतो.",
   "testimonials.title": "ग्राहक प्रशंसापत्रे",
-  "testimonials.description": "आमचे आनंदी ग्राहक त्यांच्या अनुभवाबद्दल काय म्हणतात ते पहा!"
+  "testimonials.description": "आमचे आनंदी ग्राहक त्यांच्या अनुभवाबद्दल काय म्हणतात ते पहा!",
+  "greeting_message": "आमच्यावर विश्वास ठेवून तुमच्या खास कस्टम क्रिएशन्ससाठी आम्हाला निवडणाऱ्या असंख्य ग्राहकांचे आम्ही मनःपूर्वक आभार मानतो.",
+  "greeting_message_placeholder": "प्रत्येकाची कहाणी इथे मांडता येणार नाही, पण त्या प्रत्येक गोष्टी आम्हाला उत्तम सेवा देण्यासाठी सतत प्रेरणा देतात. आमच्या या प्रवासाचा भाग झाल्याबद्दल तुमचे मनापासून आभार!"
 
 
 
