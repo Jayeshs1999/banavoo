@@ -20,7 +20,8 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
-  const [googleLogin] = useGoogleLoginMutation();
+  const [googleLogin, { isLoading: isLoadingGoogle }] =
+    useGoogleLoginMutation();
 
   const { userInfo } = useSelector((state: any) => state.auth);
 
@@ -142,8 +143,6 @@ const LoginScreen = () => {
         <Card.Text className="fs-5 text-dark">
           Let’s bring your ideas to life with stunning custom creations!
         </Card.Text>
-        {isLoading && <Loader />}
-
         <div className="px-3 pb-3">
           <Button
             onClick={handleGoogleLogin}
@@ -166,6 +165,7 @@ const LoginScreen = () => {
             Sign in with Google
           </Button>
         </div>
+        {isLoadingGoogle && <Loader />}
       </Card>
     </FormContainer>
   );
